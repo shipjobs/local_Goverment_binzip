@@ -29,5 +29,5 @@ for i, (file, head) in enumerate(header.items()):
 
   df_combined = df_combined.loc[:, ~df_combined.columns.str.contains('^Unnamed')]
   
-  df_combined.to_csv('./output/지자체컬럼정보통합.csv', index=True, encoding='UTF-8-sig')
+  df_combined.to_csv('./output/지자체빈집개방데이터통합.csv', index=True, encoding='UTF-8-sig')
     

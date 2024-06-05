@@ -1,4 +1,5 @@
 import os
+from time import sleep
 import pandas as pd
 import csv
 
@@ -25,7 +26,9 @@ for filename in os.listdir(directory):
         data.rename(columns={col: values_tobe[values_asis.index(col)]}, inplace=True)        
       
     #변경된 컬럼명으로 파일 저장    
-    data.to_csv(file_path, index=False, encoding='utf-8')   
+    data.to_csv(file_path, index=False, encoding='utf-8')  
+    sleep(1)  #파일 저장시간을 위해 1초 대기
+     
     
 
 #변경된 컬럼 정보기준, 전체 파일을 읽어서 하나의 파일로 통합    
@@ -53,5 +56,6 @@ for i, (file, head) in enumerate(header.items()):
   
   #DB에 지지체별로 저장할 경우, 지자체명 (파일명) 컬럼 추가
   df_combined.insert(0, '지자체명', file)
-  df_combined.to_csv('./output/지자체컬럼정보통합.csv', index=True, encoding='UTF-8-sig')
+  df_combined.to_csv('./output/지자체빈집개방데이터통합.csv', index=True, encoding='UTF-8-sig')
+  sleep(1)  #파일 저장시간을 위해 1초 대기
     
