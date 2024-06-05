@@ -2,6 +2,7 @@ import os
 from time import sleep
 import pandas as pd
 import csv
+import datetime
 
 
 directory = r'data/csv'
@@ -55,7 +56,7 @@ for i, (file, head) in enumerate(header.items()):
   df_combined = df_combined.loc[:, ~df_combined.columns.str.contains('^Unnamed')]
   
   #DB에 지지체별로 저장할 경우, 지자체명 (파일명) 컬럼 추가
-  df_combined.insert(0, '지자체명', file)
-  df_combined.to_csv('./output/지자체빈집개방데이터통합.csv', index=True, encoding='UTF-8-sig')
+  df_combined.insert(0, '지자체_등록파일명', file)
+  df_combined.to_csv('./output/지자체빈집개방데이터통합' + datetime.datetime.now().strftime("%Y%m%d%H%M") + '.csv', index=True, encoding='UTF-8-sig')
   sleep(1)  #파일 저장시간을 위해 1초 대기
     
