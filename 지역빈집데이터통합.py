@@ -50,13 +50,15 @@ for filename in os.listdir(directory):
 
 #변환된 컬럼명을 갖는 모든 파일을 읽어서 통합 (동일 컬럼명끼리 값도 통합 되도록 함, 값이 없는 경우 Unnamed 으로 표기됨)   
 for i, (file, head) in enumerate(header.items()): 
-  #print(i, file, head)
-  df_combined = pd.concat([pd.read_csv(os.path.join(directory, file) , encoding='UTF-8-sig') for file in header.keys()])
-
-  df_combined = df_combined.loc[:, ~df_combined.columns.str.contains('^Unnamed')]
   
-  #DB에 지지체별로 저장할 경우, 지자체명 (파일명) 컬럼 추가
-  df_combined.insert(0, '지자체_등록파일명', file)
+  # print(i, file, head)
+  df_combined = pd.concat([pd.read_csv(os.path.join(directory, file) , encoding='UTF-8-sig') for file in header.keys()])
+  df_combined = df_combined.loc[:, ~df_combined.columns.str.contains('^Unnamed')]
   df_combined.to_csv('./output/지자체빈집개방데이터통합' + datetime.datetime.now().strftime("%Y%m%d%H%M") + '.csv', index=True, encoding='UTF-8-sig')
   sleep(1)  #파일 저장시간을 위해 1초 대기
     
+
+#첫번째 컬럼에 지자체명이 있는 경우, 지자체명을 파일명으로 변경하여 저장  
+
+    
+
